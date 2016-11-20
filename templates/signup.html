@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block pagetitle %}
+<h2 class="flask_ask-question-section-title"> Registration </h2>
+{% endblock %}
+
+
+{% block pageContent %}  
+
+<form class="form-horizontal">
+  <fieldset>
+    <legend></legend>
+    <div class="form-group">
+      <label class="col-lg-3 control-label">Login</label>
+      <div class="col-lg-5">
+        <input type="text" class="form-control noresize" name="login" placeholder="Username">
+      </div>
+    </div>        
+
+    <div class="form-group">
+      <label class="col-lg-3 control-label ">Email address</label>
+      <div class="col-lg-5">
+        <input type="email" class="form-control noresize" name="email" placeholder="example@ask.com" required placeholder = "Enter your email!">
+      </div>
+    </div> 
+
+    <div class="form-group">
+      <label class="col-lg-3 control-label">Nickname</label>
+      <div class="col-lg-5">
+        <input type="text" class="form-control noresize" name="nickname" placeholder="Nick">
+      </div>
+    </div>  
+
+    <div class="form-group">
+      <label class="col-lg-3 control-label">Password</label>
+      <div class="col-lg-5">
+        <input type="password" class="form-control noresize" name="password">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-lg-3 control-label">Retype password</label>
+      <div class="col-lg-5">
+        <input type="password" class="form-control noresize" name="confirmPassword">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-lg-3 control-label">Upload avatar</label>
+      <div class="col-lg-5">
+        <input type="file" name="avatar">
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="form-group">
+    <div class="col-lg-9 col-lg-offset-3">
+      <button type="submit" class="btn btn-dark">Register</button>
+      <div class="flask__login-error">
+        <p></p>
+        Email is already used.
+      </div>
+    </div>
+  </div>
+</form>
+{% endblock %}
+{% block paginator %}
+{% endblock %}
+
+
+

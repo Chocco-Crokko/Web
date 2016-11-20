@@ -1,0 +1,311 @@
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+.navbar-inverse {
+	background-color: #e2e2e2;
+}
+
+.row{
+	margin-right: 0px;
+}
+
+.nav > li > a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
+
+ul.nav > li.active > a {
+	padding-bottom: 20px;
+}
+.flask_question_block {
+	border-radius: 7px;
+	padding-top: 15px;
+	margin-top: 35px;
+	margin-bottom: 35px;
+	background-color: #ffffff
+}
+
+.flask__question-block_user-data {
+	padding-left: 15px;
+	padding-bottom: 15px;
+	margin-left: 30px;
+}
+.flask__question-rate {
+	font-size: 24px;
+	color: #12ff12;
+	text-align: right;
+}
+
+.like {
+	color: #12ff12;
+}
+
+.dislike {
+	color: #ff2121;
+}
+
+hr{
+	border-color: #d5dddf;
+}
+
+.flask_section-title{
+	margin: 30px;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+.flask_ask-question-section-title
+{
+	text-align: center;
+}
+
+.flask_section-title > span{
+	border-color: #111;
+	border-radius: 7px;
+	background-color: #f2f2f2;
+	padding: 7px;
+	margin-left: 5px;
+}
+.flask_section-title > span.active{
+	border-color: #111;
+	border-radius: 7px;
+	background-color: #d5dddf;
+}
+
+.flask__right-block{
+    margin-top: 35px;
+   
+}
+.flask__right-block_popular-tags{
+	border-radius: 7px;
+	border: 3px;
+	border-color: #81f681;
+	background-color: #f2f2f2;
+	padding: 15px;
+	margin-right: 40px;
+	margin-bottom: 15px;
+
+}
+
+.flask__right-block_popular-tags > a {
+	padding: 7px;
+
+}
+
+#Number1 {
+	color: #f00;
+	font-size: xx-large;
+}
+
+#Number2 {
+color: #f90;
+font-size: x-large;
+}
+
+#Number3 {
+	color: #cf0;
+	font-size: x-large;
+}
+
+#Number4 {
+    color: #ff00d8;
+    font-size: medium;
+}
+
+#Number5 {
+	color: #00d2ff;
+	font-size: medium;
+}
+
+#Number6 {
+	color: #00ff54;
+	font-size: medium;
+}
+
+#Number7 {
+	color: #ff005a;
+	font-size: medium;
+}
+
+#Number8 {
+	color: #9177f8;
+}
+
+.btn > .bage{
+	text-align: left;
+}
+
+.noresize {
+	resize: none;
+}
+.flask__right-block_best-members{
+	border-radius: 7px;
+	border: 3px;
+	border-color: #81f681;
+	background-color: #f2f2f2;
+	padding: 15px;
+	margin-right: 40px;
+	margin-bottom: 15px;
+}
+
+
+
+body {
+	background-color: #ffffff;
+}
+
+.flask__question_answer-block{
+	padding-top: 15px;
+	margin-top: 35px;
+	margin-bottom: 35px;
+	margin-left: 20px;
+	background-color: #ffffff;
+	border-radius: 7px;	
+}
+.flask__answer{
+	margin-left: 35px;
+}
+.flask__answer-button{
+	margin-top: 20px;
+}
+
+.flask_ask-question-form{
+	margin-top: 15px;
+}
+
+.flask__login-form{
+	margin-bottom: 10px;
+}
+.flask__login-error{
+	color: red;
+}
+
+
+
+.pagination {
+  display: inline-block;
+  padding-left: 0;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+.pagination > li {
+  display: inline;
+}
+.pagination > li > a,
+.pagination > li > span {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.42857143;
+  color: #fff;
+  text-decoration: none;
+  background-color: #505050;
+  border: 1px solid #545454;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span {
+  margin-left: 0;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+  z-index: 2;
+  color: #eee;
+  background-color: #1274BD;
+  border-color: #0E67AA;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  z-index: 3;
+  color: #fff;
+  cursor: default;
+  background-color: #121212;
+  border-color: #545454;
+}
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+  color: #ddd;  
+  background-color: #868686;
+  border-color: #545454;
+}
+
+.flask__pagination{
+	margin-left: 100px;
+}
+
+.btn-dark {
+  color: #fff;
+  background-color: #6ca0bc;
+  border-color: #2a2a2a;
+}
+.btn-dark:hover,
+.btn-dark:focus{
+  color: #ddd;
+  background-color: #4986a1;
+  border-color: #0E67AA;
+}
+
+.btn-dark:active{
+  color: #ddd;
+  background-color: #104E7D;
+  border-color: #0E67AA;
+}
+
+.form-control{
+	color: #555555;
+	background-color: #f2f2f2;
+	border-color: #424242;
+}
+
+.dropdown-menu > li > a,
+.dropdown-menu {
+	color: #555555;
+	background-color: #e2e2e2;
+	border-color: #424242;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+	color: #2352c7;
+	background-color: #d5dddf;
+}
+
+.btn-success{
+	background-color: #646464;
+	border-color: #545454;
+}
+.btn-danger{
+	background-color: #9f9f9f;
+	border-color: #7f7f7f;
+}
+
+.flaske__bottomblock{
+	margin-bottom: 15px;
+	margin-top: 15px;
+}
+.flaske__tickblock{	
+	margin-top: 15px;
+}
+.flaske__user-avatar {
+	margin-bottom: 15px;
+}

@@ -1,0 +1,28 @@
+server {
+  listen 80 default_server;
+  listen [::]:80 default_server;
+
+  root /var/www/fl_ask;
+
+  server_name flask.com;
+  server_name 127.0.0.1;
+ 
+  location /uploads {
+    root /var/www/fl_ask/;
+  }
+
+  location ~* \.(css|js|png|jpe?g|gif|woff2|ttf|svg|eot)$ {
+    root /var/www/fl_ask/;
+    expires 30d;
+    add_header Cache-Control private;
+  }
+
+  location / {
+    proxy_pass http://backend;
+    proxy_set_header Host  	$host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_cache cache;
+    proxy_cache_valid any 1h;
+  }
+
+}

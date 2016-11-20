@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block pagetitle %}
+<h2 class="flask_ask-question-section-title"> Log In </h2>
+{% endblock %}
+{% block pageContent %}
+<div class="col-sm-10 col-sm-offset-2">
+  <h2></h2>
+</div>      
+
+<form class="form-horizontal">
+  <hr>
+  <fieldset>
+    <div class="form-group">
+      <label class="col-lg-3 control-label">Login</label>
+      <div class="col-lg-5">
+        <input type="text" class="form-control noresize" name="login" placeholder="Enter your login here">
+      </div>
+    </div>             
+
+    <div class="form-group">
+      <label class="col-lg-3 control-label">Password</label>
+      <div class="col-lg-5">
+        <input type="password" class="form-control noresize" name="password" placeholder="*************">
+      </div>
+    </div>         
+  </fieldset>
+
+  <div class="form-group">
+    <div class="col-lg-9 col-lg-offset-3">
+      <button type="submit" class="btn btn-dark">Log in!</button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="checkbox col-lg-9 col-lg-offset-3">
+      <label><input type="checkbox" value="">Remember me</label>
+      <p></p>
+      <p><a href="/signup/">Create a new account</a></p>
+    </div>
+  </div> 
+</form>
+{% endblock %}
+
+
+
