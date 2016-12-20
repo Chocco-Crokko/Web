@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from fl_askapp import models
+from fl_askapp import paginator_foo
 import random
 
 
@@ -12,7 +13,7 @@ tags = []
 for i in range (1,4):
 	tags.append({
 		"tag" : "SomeTag"})
-for i in range (1,6):
+for i in range (1,300):
 	questions.append({
 		"title" : "Question Title",
 		"text" : "Lorem Ipsum is simply dummy text of the printing and typesetting industry.\
@@ -25,7 +26,7 @@ for i in range (1,6):
 			including versions of Lorem Ipsum.",
 		"id" : i,
 		"user_rating" : random.randint(-100,100),
-		"user_name" : "Asking User",
+		"user_name" : "SomeUser",
 		"question_rating" : random.randint(-100,100),
 		"tags" : tags
 		})
@@ -38,7 +39,7 @@ for i in range (1,6):
 			 ipsum quisque sit leo duis sapien ut. Eros leo sit diam eros quam massa diam congue\
 			 lectus eros. Maecenas lorem nulla integer risus mattis odio sodales sem congue magna\
 			 at duis sem sit mauris, justo, nam lorem lectus. ",
-		"user_name" : "Responsing User",
+		"user_name" : "AnotherUser",
 		"user_rating" : random.randint(-100,100),
 		"answer_rating" : random.randint(-100,100)
 		})
@@ -46,32 +47,42 @@ for i in range (1,6):
 		
 
 
-def index(request):
+def index(request, page = '1'):
 	user = { "user_is_logged" : False}	
-	return render(request, 'index.html', {"questions": questions, "user" : user}, )
+	question_list = paginator_foo.pagination(questions, 5, page)
+	question_list.paginator.baseurl = "/"
+	return render(request, 'index.html', {"questions": question_list, "user" : user}, )
 
-def hot_questions(request):
+def hot_questions(request, page = '1'):
 	user = { "user_is_logged" : True}
-	return render(request, 'hot_questions.html', {"questions": questions, "user" : user}, )
+	question_list = paginator_foo.pagination(questions, 5, page)
+	question_list.paginator.baseurl = "/hot/"
+	return render(request, 'hot_questions.html', {"questions": question_list, "user" : user}, )
 
-def profile(request):
+def profile(request, user_name, page = '1'):
 	user = ({ 
 		"user_is_logged" : True,
 		"info" : "Lorem, ipsum orci nam diam porta justo porttitor ornare massa - elementum,\
 			sit a at. Sem, ligula sem pellentesque leo, sodales sed fusce molestie massa a\
 			 commodo ligula tempus  ipsum",
-		"name" : "This user",	
+		"name" : user_name,	
 		"rating" : random.randint(-100,100)
 		})
-	return render(request, 'profile.html', {"questions": questions, "user" : user}, )
+	question_list = paginator_foo.pagination(questions, 5, page)
+	question_list.paginator.baseurl = "/profile/" + user["name"] + "/"
+	return render(request, 'profile.html', {"questions": question_list, "user" : user}, )
 
-def tag(request, tag):	
-	user = { "user_is_logged" : True}		
-	return render(request, 'tag.html', {"questions": questions, "user" : user, "tag" : tag}, )
+def tag(request, tag, page = '1'):	
+	user = { "user_is_logged" : True}
+	question_list = paginator_foo.pagination(questions, 5, page)
+	question_list.paginator.baseurl = "/tag/" + tag + "/"				
+	return render(request, 'tag.html', {"questions": question_list, "user" : user, "tag" : tag}, )
 
-def single_question(request):
+def single_question(request, id, page = '1'):
 	user = { "user_is_logged" : True}	
-	return render(request, 'question.html', {"question": questions[0], "answers" : answers, "user" : user},)
+	answer_list = paginator_foo.pagination(answers, 4, page)
+	answer_list.paginator.baseurl = "/question/id" + id + "/"
+	return render(request, 'question.html', {"question": questions[0], "answers" : answer_list, "user" : user},)
 
 def developing(request):
 	user = { "user_is_logged" : True}	

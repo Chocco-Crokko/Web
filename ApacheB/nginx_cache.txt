@@ -1,0 +1,55 @@
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking flask.com (be patient)
+Completed 5000 requests
+Completed 10000 requests
+Completed 15000 requests
+Completed 20000 requests
+Completed 25000 requests
+Completed 30000 requests
+Completed 35000 requests
+Completed 40000 requests
+Completed 45000 requests
+Completed 50000 requests
+Finished 50000 requests
+
+
+Server Software:        nginx/1.10.0
+Server Hostname:        flask.com
+Server Port:            80
+
+Document Path:          /
+Document Length:        2297 bytes
+
+Concurrency Level:      10
+Time taken for tests:   0.700 seconds
+Complete requests:      50000
+Failed requests:        0
+Keep-Alive requests:    49507
+Total transferred:      133197535 bytes
+HTML transferred:       114850000 bytes
+Requests per second:    71386.35 [#/sec] (mean)
+Time per request:       0.140 [ms] (mean)
+Time per request:       0.014 [ms] (mean, across all concurrent requests)
+Transfer rate:          185712.62 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       4
+Processing:     0    0   0.5      0      17
+Waiting:        0    0   0.5      0      17
+Total:          0    0   0.5      0      17
+
+Percentage of the requests served within a certain time (ms)
+  50%      0
+  66%      0
+  75%      0
+  80%      0
+  90%      0
+  95%      0
+  98%      1
+  99%      3
+ 100%     17 (longest request)
+

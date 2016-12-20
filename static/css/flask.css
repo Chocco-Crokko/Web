@@ -201,9 +201,9 @@ body {
   padding: 6px 12px;
   margin-left: -1px;
   line-height: 1.42857143;
-  color: #fff;
+  color: #6ca0bc;
   text-decoration: none;
-  background-color: #505050;
+  background-color: #e2e2e2;
   border: 1px solid #545454;
 }
 .pagination > li:first-child > a,
@@ -233,9 +233,9 @@ body {
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
   z-index: 3;
-  color: #fff;
+  color: #5c90ac;
   cursor: default;
-  background-color: #121212;
+  background-color: #d5dddf;
   border-color: #545454;
 }
 .pagination > .disabled > span,

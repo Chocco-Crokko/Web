@@ -30,7 +30,7 @@
       <img src="{% static 'images/avatar2.jpg' %}" class="img-circle flaske__user-avatar" width="110" height="110">
       <p><b>{{ question.user }}</b></p>
 
-      {% if profile.rating >= 0 %}
+      {% if user.rating >= 0 %}
         <p>Rating: <span class="like"><b> +{{ user.rating }}</b></span></p>
       {% else %}
         <p>Rating: <span class="dislike"><b> {{ user.rating }}</b></span></p>
@@ -56,17 +56,17 @@
       </p> 
     {% endif %}      
       <p>
-        <a href="/question/id{{ question.id }}"><strong> {{ question.title }}</strong></a>
+        <a href="{% url 'question' question.id %}"><strong> {{ question.title }}</strong></a>
       </p>         
       <p>{{ question.text }}</p>
       <p>
-        <a href="/developing" class="pull-right">December 22, 2012</a>
+        <a href="{% url 'developing'%}" class="pull-right">December 22, 2012</a>
       </p>
       <p>
-        <a href="/question/id{{ question.id }}">Answers <span class="badge">5</span></a>
+        <a href="{% url 'question' question.id %}">Answers <span class="badge">5</span></a>
         Tags: 
         {% for tag in question.tags %}
-        <a href="/tag/{{ tag.tag }}">{{ tag.tag }}</a>
+        <a href="{% url 'tag' tag.tag %}">{{ tag.tag }}</a>
         {% endfor %}
       </p>        
     </div>       

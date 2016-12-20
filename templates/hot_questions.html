@@ -4,8 +4,8 @@
 {% block pagetitle %}
 <span >
   <h3 class="flask_section-title">
-    <span> <a href="/"> New Questions </a></span>
-    <span class="active"><a href="/hot/"> Hot Questions </a></span>
+    <span> <a href="{% url 'index'%}"> New Questions </a></span>
+    <span class="active"><a href="{% url 'hot_questions'%}"> Hot Questions </a></span>
   </h3>
 </span>
 {% endblock %}
