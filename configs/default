@@ -1,3 +1,6 @@
+proxy_buffering on;
+proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=cache:10m max_size=32m;
+
 server {
   listen 80 default_server;
   listen [::]:80 default_server;
@@ -13,6 +16,8 @@ server {
 
   location ~* \.(css|js|png|jpe?g|gif|woff2|ttf|svg|eot)$ {
     root /var/www/fl_ask/;
+	expires 30d;
+    add_header Cache-Control private;
   }
 
   location / {
