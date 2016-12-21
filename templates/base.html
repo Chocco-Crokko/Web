@@ -54,20 +54,21 @@
         </div>
         <button type="submit" class="btn btn-dark"><span class="glyphicon glyphicon-search"></span></button>
       </form>
-    {% if user.user_is_logged %}
+
+    {% if request.user.is_authenticated %}
       {% block navbarUserLogged %}
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <img src="{% static 'images/user_avatar.jpeg' %}" width="30" class="img-circle" alt="avatar">
-            User <span class="caret"></span>
+            <img src="/{{ request.user.profile.avatar.url }}" width="30" class="img-circle" alt="avatar">
+            {{request.user}} <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="{% url 'profile' 'User'%}">My questions</a></li>
+            <li><a href="{% url 'profile' request.user%}">My questions</a></li>
           </ul>
         </li>        
         <li><a href="{% url 'ask'%}">New question</a></li>
-        <li><a href="{% url 'login'%}">Log Out <span class="glyphicon glyphicon-log-out"></span></a></li>
+        <li><a href="{% url 'logout'%}?continue={{ request.path }}">Log Out <span class="glyphicon glyphicon-log-out"></span></a></li>
       </ul>
       {% endblock %}
     {% else %}
@@ -75,12 +76,12 @@
       <ul class="nav navbar-nav navbar-right">
 
         <li><a href="{% url 'signup'%}">Register</a></li>
-        <li><a href="{% url 'login'%}">Log in <span class="glyphicon glyphicon-log-in"></a></li>
+        <li><a href="{% url 'login'%}?continue={{ request.path }}">Log in <span class="glyphicon glyphicon-log-in"></a></li>
       </ul>
       {% endblock %}
     {% endif %}
 
-    </div><!-- /.navbar-collapse -->
+    </div>
   </nav>
   {% endblock %}
 
@@ -132,7 +133,7 @@
     </div>
 
     {%block sidebar%}
-    <div class="col-sm-3  col-sm-offset-1 flask__right-block"> <!--right block-->
+    <div class="col-sm-3  col-sm-offset-1 flask__right-block">
       {% block populartags %}
       <div class="flask__right-block_popular-tags">
         <h3>Popular tags</h3>

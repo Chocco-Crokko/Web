@@ -15,6 +15,7 @@ class QuestionManager(models.Manager):
 
 	def published(self):
 		return self.filter(is_published=True)
+
 	def user_questions(self, user_name):
 		return self.filter(user__username = user_name)
 
@@ -25,14 +26,14 @@ class ProfileManager(models.Manager):
         return self.filter(user__username = user_name)
 
 class TagManager(models.Manager):
-	def with_question_count(self):
-		return self.annotate(questions_count=Count('question'))
+    def with_question_count(self):
+        return self.annotate(questions_count=Count('question'))
 
-	def order_by_question_count(self):
-		return self.with_question_count().order_by('-questions_count')
+    def order_by_question_count(self):
+        return self.with_question_count().order_by('-questions_count')
 
-	def get_popular_tags(self):
-		return self.order_by_question_count().all()[:10]
+    def get_popular_tags(self):
+        return self.order_by_question_count().all()[:10]
 
 class Tag(models.Model):
     class Meta:
@@ -90,15 +91,4 @@ class Answer(models.Model):
     rating = models.IntegerField(default = 0, verbose_name=u'Рейтинг')
     created = models.DateTimeField(default = datetime.datetime.now)
     is_correct = models.BooleanField(default = False, verbose_name=u'Корректность')
-    id = models.IntegerField(primary_key=True, verbose_name=u'id')
-
-
-class Like(models.Model):
-	status = models.IntegerField(default=0)
-	#question = models.ForeignKey(Question)
-
-
-	def __unicode__(self):
-		return str(self.rating)
-
 

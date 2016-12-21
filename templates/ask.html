@@ -2,42 +2,74 @@
 {% load static %}
 
 {% block pagetitle %}
+  {% if new_question %}
   <h2 class="flask_ask-question-section-title"> New Question </h2>
+  {% else %}
+  <h2 class="flask_ask-question-section-title"> Edit Question </h2>
+  {% endif %}
 {% endblock %}
 
   {% block pageContent %}   
+<form class="form-horizontal" method="post">
+  {% csrf_token %}
+  <div class="flask_ask-question-form">
 
-  <div class="flask_ask-question-form"> <!-- ask question block-->
-    <div class = "col-sm-1">
-      <h4>Title:</h4>
-    </div>
-    <div class = "col-sm-11">
-      <div class="form-group">
-        <textarea class="form-control noresize" rows="1" placeholder="Enter your title here"></textarea>
+    <div class="form-group {% if form.title.errors %}has-error{% endif %}">
+      <label class="col-lg-1 control-label">Title</label>
+      <div class = "col-sm-11">      
+        {{ form.title }}
+        {% if form.title.errors %} 
+          {% for error in form.title.errors %}
+          <p></p>
+          <div class="flask__login-error" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            {{ error }}
+          </div>
+          {% endfor %}
+        {% endif %}
       </div>
     </div>
 
-    <div class = "col-sm-1">
-      <h4>Text:</h4>
-    </div>
-    <div class = "col-sm-11">
-      <div class="form-group">
-        <textarea class="form-control noresize" rows="14" placeholder="Enter your question here"></textarea>
+    <div class="form-group {% if form.text.errors %}has-error{% endif %}">
+      <label class="col-lg-1 control-label">Text</label>
+      <div class = "col-sm-11">      
+        {{ form.text }}
+        {% if form.text.errors %} 
+          {% for error in form.text.errors %}
+          <p></p>
+          <div class="flask__login-error" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            {{ error }}
+          </div>
+          {% endfor %}
+        {% endif %}
       </div>
     </div>
 
-    <div class = "col-sm-1">
-      <h4>Tags:</h4>
+    <div class="form-group {% if form.tag1.errors %}has-error{% endif %}">
+    <label for="tag" class="col-sm-1 control-label">Tags</label> 
+      <div class="col-sm-11">       
+        {{ form.tags }}
+        {% if form.tags.errors %} 
+          {% for error in form.tags.errors %}
+          <p></p>
+          <div class="flask__login-error" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            {{ error }}
+          </div>
+          {% endfor %}
+        {% endif %}
+      </div>      
     </div>
-    <div class = "col-sm-11">
-      <div class="form-group">
-        <textarea class="form-control noresize" rows="1"placeholder="Enter some tags here"></textarea>
-      </div>
+    
+ 
+    <div class="form-group">
+    <div class="col-sm-12 col-sm-offset-1">
+      <button type="submit" class="btn btn-dark">Ask</button>      
     </div>
-    <div class="col-sm-11  col-sm-offset-1">
-      <button type="button" class="btn btn-dark">Ask!</button>
-    </div>
-  </div> <!-- /ask question block-->       
+  </div>  
+  </div> 
+</form> 
 
 {% endblock %}
 {% block paginator %}

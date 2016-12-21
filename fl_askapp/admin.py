@@ -8,12 +8,9 @@ class AnswerAdmin(admin.ModelAdmin):
 	list_display=('text',)
 class TagAdmin(admin.ModelAdmin):
 	list_display=('text',)
-class LikeAdmin(admin.ModelAdmin):
-	list_display=('status',)
 class ProfileAdmin(admin.ModelAdmin):
 	list_display=('user',)
 admin.site.register(models.Question, QuestionAdmin)
 admin.site.register(models.Answer, AnswerAdmin)
 admin.site.register(models.Tag, TagAdmin)
-admin.site.register(models.Like, LikeAdmin)
 admin.site.register(models.Profile, ProfileAdmin)

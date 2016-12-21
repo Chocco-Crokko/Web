@@ -72,7 +72,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'fl_ask.wsgi.application'
-
+LOGIN_URL = '/login/'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
