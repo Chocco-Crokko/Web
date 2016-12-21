@@ -1,88 +1,48 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from fl_askapp import models
+from django.contrib.auth.models import User
+from fl_askapp.models import *
 from fl_askapp import paginator_foo
 import random
 
 
-
-questions = []
-answers = []
-tags = []
-for i in range (1,4):
-	tags.append({
-		"tag" : "SomeTag"})
-for i in range (1,300):
-	questions.append({
-		"title" : "Question Title",
-		"text" : "Lorem Ipsum is simply dummy text of the printing and typesetting industry.\
-			Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,\
-			when an unknown printer took a galley of type and scrambled it to make a type\
-			specimen book. It has survived not only five centuries, but also the leap into\
-			electronic typesetting, remaining essentially unchanged. It was popularised in\
-			the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,\
-			and more recently with desktop publishing software like Aldus PageMaker\
-			including versions of Lorem Ipsum.",
-		"id" : i,
-		"user_rating" : random.randint(-100,100),
-		"user_name" : "SomeUser",
-		"question_rating" : random.randint(-100,100),
-		"tags" : tags
-		})
-	answers.append({
-		"text" : "Lorem, ipsum orci nam diam porta justo porttitor ornare massa - elementum,\
-			sit a at. Sem, ligula sem pellentesque leo, sodales sed fusce molestie massa a\
-			 commodo ligula tempus  ipsum, in sapien amet ornare rutrum amet tempus ligula\
-			 curabitur - pellentesque. Justo ut arcu adipiscing eros vitae, diam, sit gravida,\
-			 massa a ornare rutrum sem eget duis quisque vivamus. Nec pellentesque ligula, nibh\
-			 ipsum quisque sit leo duis sapien ut. Eros leo sit diam eros quam massa diam congue\
-			 lectus eros. Maecenas lorem nulla integer risus mattis odio sodales sem congue magna\
-			 at duis sem sit mauris, justo, nam lorem lectus. ",
-		"user_name" : "AnotherUser",
-		"user_rating" : random.randint(-100,100),
-		"answer_rating" : random.randint(-100,100)
-		})
-
-		
-
-
 def index(request, page = '1'):
 	user = { "user_is_logged" : False}	
-	question_list = paginator_foo.pagination(questions, 5, page)
+	myquestions = Question.objects.newest()
+	question_list = paginator_foo.pagination(myquestions, 5, page)
 	question_list.paginator.baseurl = "/"
 	return render(request, 'index.html', {"questions": question_list, "user" : user}, )
 
 def hot_questions(request, page = '1'):
 	user = { "user_is_logged" : True}
-	question_list = paginator_foo.pagination(questions, 5, page)
+	myquestions = Question.objects.hot()
+	question_list = paginator_foo.pagination(myquestions, 5, page)
 	question_list.paginator.baseurl = "/hot/"
 	return render(request, 'hot_questions.html', {"questions": question_list, "user" : user}, )
 
 def profile(request, user_name, page = '1'):
-	user = ({ 
-		"user_is_logged" : True,
-		"info" : "Lorem, ipsum orci nam diam porta justo porttitor ornare massa - elementum,\
-			sit a at. Sem, ligula sem pellentesque leo, sodales sed fusce molestie massa a\
-			 commodo ligula tempus  ipsum",
-		"name" : user_name,	
-		"rating" : random.randint(-100,100)
-		})
-	question_list = paginator_foo.pagination(questions, 5, page)
-	question_list.paginator.baseurl = "/profile/" + user["name"] + "/"
-	return render(request, 'profile.html', {"questions": question_list, "user" : user}, )
+	user = {"user_is_logged": True}
+	myquestions = Question.objects.user_questions(user_name)
+	profile = Profile.objects.get_by_name(user_name)
+	question_list = paginator_foo.pagination(myquestions, 5, page)
+	question_list.paginator.baseurl = "/profile/" + profile[0].user.username + "/"
+	return render(request, 'profile.html', {"questions": question_list, "profile": profile[0], "user" : user}, )
 
 def tag(request, tag, page = '1'):	
 	user = { "user_is_logged" : True}
-	question_list = paginator_foo.pagination(questions, 5, page)
-	question_list.paginator.baseurl = "/tag/" + tag + "/"				
+	myquestions = Question.objects.tag_search(tag)
+	question_list = paginator_foo.pagination(myquestions, 5, page)
+	question_list.paginator.baseurl = "/tag/" + tag + "/"		
 	return render(request, 'tag.html', {"questions": question_list, "user" : user, "tag" : tag}, )
 
 def single_question(request, id, page = '1'):
 	user = { "user_is_logged" : True}	
+	question = Question.objects.get(pk=id)
+	answers = question.answer_set.all()
 	answer_list = paginator_foo.pagination(answers, 4, page)
 	answer_list.paginator.baseurl = "/question/id" + id + "/"
-	return render(request, 'question.html', {"question": questions[0], "answers" : answer_list, "user" : user},)
+	return render(request, 'question.html', {"question": question, "answers" : answer_list, "user" : user},)
 
 def developing(request):
 	user = { "user_is_logged" : True}	

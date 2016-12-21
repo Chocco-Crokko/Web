@@ -136,14 +136,9 @@
       {% block populartags %}
       <div class="flask__right-block_popular-tags">
         <h3>Popular tags</h3>
-        <a href="/tag/TechnoPark/" id="Number3">TechnoPark</a>
-        <a href="/tag/Perl/" id="Number7">Perl</a>
-        <a href="/tag/Python/" id="Number1">Python</a>
-        <a href="/tag/CSS/" id="Number2">CSS</a>
-        <a href="/tag/HTML/" id="Number6">HTML</a>
-        <a href="/tag/TarantoolDB/" id="Number4">Tarantool DB</a>
-        <a href="/tag/PostgreSQL/" id="Number5">PostgreSQL</a>
-        <a href="/tag/Ruby/" id="Number8">Ruby</a>
+        {% for tag in popular_tags %}
+          <a href="{% url 'tag' tag.text %}" id="Number{{ tag.style_number }}">{{ tag.text }}</a>
+        {% endfor %}
       </div>
       {% endblock %}
 
@@ -151,10 +146,9 @@
       <div class="flask__right-block_best-members">
         <h3>Best Members</h3>
         <ul>
-          <li><a href="{% url 'profile' 'GladUser'%}">GladUser</a></li>
-          <li><a href="{% url 'profile' 'KindUser'%}">KindUser</a></li>
-          <li><a href="{% url 'profile' 'FunnyUser'%}">FunnyUser</a></li> 
-          <li><a href="{% url 'profile' 'CleverUser'%}">CleverUser</a></li>         
+          {% for user in best_users %}
+          <li><a href="{% url 'profile' user.user.username %}">{{ user.user.username }}</a></li>
+          {% endfor %}   
         </ul>        
       </div>
       {% endblock %}

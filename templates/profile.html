@@ -2,75 +2,28 @@
 {% load static %}
 
 {% block pageContent %}
-
+{% if profile  != 0 %}
 <div class="row flask_question_block">
 	<div class="col-md-2 flask__question-block_user-data">
-		<img src="{% static 'images/avatar.jpg' %}" class="img-circle flaske__user-avatar" width="110" height="110">
-		<p><b>{{ user.name }}</b></p>
+		<img src="/{{ profile.avatar.url }}" class="img-circle flaske__user-avatar" width="110" height="110">
+		<p><b>{{ profile.name }}</b></p>
 
-		{% if user.rating >= 0 %}
-		<p>Rating: <span class="like"><b> +{{ user.rating }}</b></span></p>
+		{% if profile.rating >= 0 %}
+		<p>Rating: <span class="like"><b> +{{ profile.rating }}</b></span></p>
 		{% else %}
-		<p>Rating: <span class="dislike"><b> {{ user.rating }}</b></span></p>
+		<p>Rating: <span class="dislike"><b> {{ profile.rating }}</b></span></p>
 		{% endif %}
 
 	</div>
 	<div class="col-md-9">             
-		<p>{{ user.info }}</p>        
+		<p>{{ profile.info }}</p>        
 	</div>
 </div>
-
+{% endif %}
 
 <legend></legend>
 
-{% for question in questions %}   
-<div class="flask_question_block"> <!-- question block-->
-  <div class="row">
-    <div class="col-md-2 flask__question-block_user-data">
-      <img src="{% static 'images/avatar2.jpg' %}" class="img-circle flaske__user-avatar" width="110" height="110">
-      <p><b>{{ question.user }}</b></p>
-
-      {% if user.rating >= 0 %}
-        <p>Rating: <span class="like"><b> +{{ user.rating }}</b></span></p>
-      {% else %}
-        <p>Rating: <span class="dislike"><b> {{ user.rating }}</b></span></p>
-      {% endif %}
-
-      <div class="btn-group-vertical">
-        <button type="button" class="btn btn-success btn-md">
-          <span class="glyphicon glyphicon-chevron-up"></span>          
-        </button>
-        <button type="button" class="btn btn-danger btn-md">
-          <span class="glyphicon glyphicon-chevron-down"></span>
-        </button>
-      </div>
-    </div>
-    <div class="col-md-9">
-    {% if question.question_rating >= 0 %}
-      <p>
-        <span class="askme__question-rate like pull-right"><b> +{{ question.question_rating }}</b></span>
-      </p>   
-    {% else %}
-      <p>
-        <span class="askme__question-rate dislike pull-right"><b> {{ question.question_rating }}</b></span>
-      </p> 
-    {% endif %}      
-      <p>
-        <a href="{% url 'question' question.id %}"><strong> {{ question.title }}</strong></a>
-      </p>         
-      <p>{{ question.text }}</p>
-      <p>
-        <a href="{% url 'developing'%}" class="pull-right">December 22, 2012</a>
-      </p>
-      <p>
-        <a href="{% url 'question' question.id %}">Answers <span class="badge">5</span></a>
-        Tags: 
-        {% for tag in question.tags %}
-        <a href="{% url 'tag' tag.tag %}">{{ tag.tag }}</a>
-        {% endfor %}
-      </p>        
-    </div>       
-   </div>
-  </div> <!-- /.question block-->
-{% endfor %}
+	{% for question in questions %}   
+	  {% include 'question_block.html' %}
+	{% endfor %}
 {% endblock %}
